@@ -3,16 +3,17 @@ import re
 from constants import CORRECT
 from constants import MISPLACED
 from constants import WRONG
+from train import train_by_position
 import constraints
 
 '''
 The naive guesser will only guess from the solutions.
 '''
 class NaiveGuesser:
-    def __init__(self, scored_words):
+    def __init__(self, word_list):
+        self.scored_words, self.letter_by_position_counts = \
+            train_by_position(word_list)
         self.constraints = constraints.Constraints()
-        # scored_words is the sorted list of word/score tuples for solutions
-        self.scored_words = scored_words
         self.guesses = []
 
     def next_guess(self):
@@ -66,3 +67,12 @@ class NaiveGuesser:
             new_positional_constraint
         )
         self.constraints.update_global_constraints(new_global_constraints)
+
+    def update_scored_words_with_constraints(self):
+        new_word_list = []
+        for s_w in self.scored_words:
+            w = s_w[0]
+            if (self.constraints.meets_constraints(s_w[0])):
+                new_word_list.append(w)
+        self.scored_words, self.letter_by_position_counts = \
+            train_by_position(new_word_list)

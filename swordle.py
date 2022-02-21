@@ -10,7 +10,7 @@ This class is the verifier for swordle.
 Its main purpose is to take guesses and check it against its solution.
 '''
 class Swordle:
-    def __init__(self, solution='', high_contrast=True):
+    def __init__(self, solution='', word_list=solutions):
         self.solution = solution
         if not self.solution:
             self.solution = solutions[random.randint(0, len(solutions))]
