@@ -20,6 +20,8 @@ To see how easiest to use this code, please see `test.py`.
   * The swordle class. This takes the role of a game instance that initializes with the solution and provides a checker for guesses which outputs new constraints for that guess as given by the online Wordle game.
 * test.py
   * An example of how to guess for every word that is a possible solution for Wordle.
+* train.py
+  * Contains a function to score and rank a given list of words.
 * utils.py
   * Also pretty self-explanatory.
 * word_lists.py
